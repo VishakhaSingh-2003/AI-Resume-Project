@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { v4 as uuidv4 } from "uuid";
 import { useUser } from "@clerk/clerk-react";
 import { Loader2 } from "lucide-react";
+import {Navigate, useNavigate} from 'react-router-dom'
 
 
 import {
@@ -23,8 +24,9 @@ function AddResume() {
   const [resumeTitle, setResumeTitle] = useState();
   const { user } = useUser();
   const [loading, setLoading] = useState(false);
+  const navigation=useNavigate();
 
-  const onCreate = () => {
+  const onCreate=async() => {
     setLoading(true);
     const uuid = uuidv4();
     const data = {
@@ -41,6 +43,7 @@ function AddResume() {
         console.log(resp);
         if (resp) {
           setLoading(false);
+          navigation('/dashboard/resume/'+uuid+"/edit");
         }
       },
       (error) => {
@@ -54,9 +57,9 @@ function AddResume() {
         className="w-50 p-14 py-24 border
          items-center flex 
          justify-center bg-secondary 
-         rounded-lg h-57 hover:scale-105 transition-all hover:shadow-md cursor-pointer border-dashed"
+         rounded-lg h-66 hover:scale-105 transition-all hover:shadow-md cursor-pointer border-dashed"
         onClick={() => setOpenDialog(true)}>
-        <PlusSquare />
+        <PlusSquare className="mb-10" />
       </div>
       <Dialog open={openDialog}>
         <DialogContent>
