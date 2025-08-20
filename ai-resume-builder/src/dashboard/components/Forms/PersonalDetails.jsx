@@ -8,6 +8,7 @@ import GlobalApi from "../../../../service/GlobalApi";
 import { Save,  LoaderCircle } from "lucide-react";
 import { toast } from "sonner";
 
+
 function PersonalDetails({ enabledNext }) {
   const params = useParams();
 
@@ -98,7 +99,7 @@ function PersonalDetails({ enabledNext }) {
           <Button
             type="submit"
             disabled={loading}
-            className="bg-[#9f5bff] hover:bg-[#9f5bff] text-white">
+            className=" hover:scale-105 transition-transform bg-[#9f5bff] hover:bg-[#9f5bff] text-white">
            {loading ? <LoaderCircle className="animate-spin" /> :'Save' }
         
           </Button>
