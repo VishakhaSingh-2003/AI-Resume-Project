@@ -38,3 +38,5 @@ function SkillsPreview({resumeInfo}) {
 }
 
 export default SkillsPreview
+
+
