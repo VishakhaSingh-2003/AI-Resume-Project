@@ -48,7 +48,7 @@ export default{
             startDate:'Aug 2018',
             endDate:'Dec:2019',
             degree:'Master',
-            major:'Computer Science',
+           major:'Computer Science',
             description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud'
         },
         {
