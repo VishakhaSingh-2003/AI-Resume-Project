@@ -17,55 +17,65 @@ function Skills() {
       rating: 0,
     },
   ]);
-  const {resumeId}=useParams();
-  const [loading,setLoading]=useState(false);
+  const { resumeId } = useParams();
+  const [loading, setLoading] = useState(false);
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
+
+  useEffect(() => {
+    if (
+      Array.isArray(resumeInfo?.skills) &&
+      resumeInfo.skills.length > 0
+    ) {
+      setSkillsList(resumeInfo.skills);
+    }
+  }, []);
+
   const handleChange = (index, name, value) => {
     const newEntries = [...skillsList];
-   
+
     newEntries[index][name] = value;
     setSkillsList(newEntries);
-
   };
 
-  const AddNewSkills=()=>{
-    setSkillsList([...skillsList,{
-         name: "",
-      rating: 0,
-    }])
-  }
+  const AddNewSkills = () => {
+    setSkillsList([
+      ...skillsList,
+      {
+        name: "",
+        rating: 0,
+      },
+    ]);
+  };
 
-  const RemoveSkills=()=>{
-     setSkillsList(skillsList=>skillsList.slice(0,-1))
-  }
+  const RemoveSkills = () => {
+    setSkillsList((skillsList) => skillsList.slice(0, -1));
+  };
 
-  const onSave=()=>{
+  const onSave = () => {
     setLoading(true);
-    const data={
-        data:{
-            skills:skillsList
-        }
-    }
+    const data = {
+      data: {
+        skills: skillsList,
+      },
+    };
     GlobalApi.UpdateResumeDetail(resumeId, data)
-  .then(resp => {
-    setLoading(false);
-    toast('Details updated!');
-  })
-  .catch(error => {
-    setLoading(false);
-    toast('Server Error, Try again!');
-  });
+      .then((resp) => {
+        setLoading(false);
+        toast("Details updated!");
+      })
+      .catch((error) => {
+        setLoading(false);
+        toast("Server Error, Try again!");
+      });
+  };
 
-  }
+  useEffect(() => {
+    setResumeInfo({
+      ...resumeInfo,
+      skills: skillsList,
+    });
+  }, [skillsList]);
 
-  useEffect(()=>{
-   setResumeInfo({
-    ...resumeInfo,
-    skills: skillsList
-   });
-  },[skillsList])
-
-  
   return (
     <div
       className="p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10"
@@ -73,14 +83,16 @@ function Skills() {
       <h2 className="font-bold text-lg">Skills</h2>
       <p>Add your top professional key skills</p>
 
-      <div >
+      <div>
         {skillsList.map((item, index) => (
-          <div key={index} className="border-2 border-gray-400 flex justify-between rounded-lg p-3 mb-2">
+          <div
+            key={index}
+            className="border-2 border-gray-400 flex justify-between rounded-lg p-3 mb-2">
             <div>
               <label className=" text-sm">Name</label>
               <Input
                 className=" border-2 border-gray-400 w-full"
-                value={item.name}
+                defaultValue={item?.name}
                 onChange={(e) => handleChange(index, "name", e.target.value)}
               />
             </div>

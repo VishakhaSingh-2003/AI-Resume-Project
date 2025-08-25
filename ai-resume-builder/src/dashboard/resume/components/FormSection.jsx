@@ -1,4 +1,3 @@
-
 import PersonalDetails from "@/dashboard/components/Forms/PersonalDetails";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -7,23 +6,33 @@ import Summery from "@/dashboard/components/Forms/Summery";
 import Experience from "@/dashboard/components/Forms/Experience";
 import Education from "@/dashboard/components/Forms/Education";
 import Skills from "@/dashboard/components/Forms/Skills";
+import { Home } from "lucide-react";
+import { Link, Navigate, useParams } from "react-router-dom";
+import ViewResume from "@/my-resume/view";
 
 function FormSection() {
   const [activeFormIndex, setActiveFormindex] = useState(2);
 
-  const [enableNext, setEnableNext]=useState(true)
-
+  const [enableNext, setEnableNext] = useState(true);
+  const {resumeId} = useParams();
   return (
     <div className="pt-20">
       <div className="flex justify-between items-center">
         {/* Theme Button */}
-        <Button
-          variant="outline"
-          size="sm"
-          className=" hover:scale-105 transition-transform bg-white hover:bg-white text-black flex gap-2">
-          <LayoutGrid />
-          Theme
-        </Button>
+        <div className="flex gap-5">
+          <Link to={'/dashboard'}>
+          <Button className='bg-[#9f5bff] hover:bg-[#9f5bff] text-white
+              hover:scale-105 transition-transform'><Home/></Button>
+          </Link>
+          <Button
+            variant="outline"
+            size="sm"
+            className=" hover:scale-105 transition-transform bg-white hover:bg-white text-black flex gap-2">
+            <LayoutGrid />
+            Theme
+          </Button>
+          
+        </div>
 
         {/* Navigation Buttons */}
         <div className="flex gap-2">
@@ -32,12 +41,12 @@ function FormSection() {
               size="sm"
               className=" bg-[#9f5bff] hover:bg-[#9f5bff] text-white
               hover:scale-105 transition-transform"
-              onClick={()=>setActiveFormindex(activeFormIndex-1)}>
+              onClick={() => setActiveFormindex(activeFormIndex - 1)}>
               <ArrowLeft />
             </Button>
           )}
           <Button
-          disabled={!enableNext}
+            disabled={!enableNext}
             className="bg-[#9f5bff] hover:bg-[#9f5bff]
             hover:scale-105 transition-transform text-white flex gap-2"
             size="sm"
@@ -48,20 +57,23 @@ function FormSection() {
       </div>
 
       {/* Personal Details */}
-      {activeFormIndex===1? 
-      <PersonalDetails enabledNext={(v)=>setEnableNext(v)} />
-       :activeFormIndex==2?
-      <Summery enabledNext={(v)=>setEnableNext(v)}/>
-      :activeFormIndex===3?
-      <Experience/>
-      :activeFormIndex==4?
-      <Education/>
-      :activeFormIndex==5?
-      <Skills/>
-      :null
+      {activeFormIndex === 1 ? (
+        <PersonalDetails enabledNext={(v) => setEnableNext(v)} />
+      ) : activeFormIndex == 2 ? (
+        <Summery enabledNext={(v) => setEnableNext(v)} />
+      ) : activeFormIndex === 3 ? (
+        <Experience />
+      ) : activeFormIndex == 4 ? (
+        <Education />
+      ) : activeFormIndex == 5 ? (
+        <Skills />
+      )
+      :activeFormIndex==6 ? (
+      <Navigate to={'/my-resume/'+resumeId+'/view'}/>
+      )
+      : null}
+      
 
-    }
-     
       {/* Experience */}
       {/* Educational Details */}
       {/* Skills */}

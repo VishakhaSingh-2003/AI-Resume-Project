@@ -34,12 +34,12 @@ Return only the summary text as plain text or JSON with a single field summary
 
 
 
-function RichTextEditor({ onRichTextEditorChange, index}) {
-  const [value, setValue] = useState();
+function RichTextEditor({ onRichTextEditorChange, index, defaultValue}) {
+  const [value, setValue] = useState(defaultValue);
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
   const [loading, setLoading] = useState(false);
 
-  const GenerateSummeryFromAI = async () => {
+  const GenerateSummaryFromAI = async () => {
     setLoading(true);
     if (!resumeInfo.experience[index].title) {
       toast("Please Add Position Title");
@@ -64,7 +64,7 @@ function RichTextEditor({ onRichTextEditorChange, index}) {
         <label className="text-sm">Summary</label>
         <Button
           size="sm"
-          onClick={GenerateSummeryFromAI}
+          onClick={GenerateSummaryFromAI}
           variant="outline"
           className="mt-2 border-2 border-gray-400 text-[#9f5bff] hover:text-[#9f5bff] focus:text-[#9f5bff] active:text-[#9f5bff] hover:scale-105 transition-transform">
           {loading ? (
@@ -104,3 +104,5 @@ function RichTextEditor({ onRichTextEditorChange, index}) {
 }
 
 export default RichTextEditor;
+
+

@@ -11,6 +11,7 @@ import { LoaderCircle } from "lucide-react";
 
 
 
+
 function Education() {
   const [loading, setLoading] = useState(false);
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
@@ -25,6 +26,12 @@ function Education() {
       description: "",
     },
   ]);
+  useEffect(() => {
+      if (Array.isArray(resumeInfo?.education) && resumeInfo.education.length > 0) {
+        setEducationalList(resumeInfo.education);
+      }
+    }, []);
+
   const handleChange = (event, index) => {
     const newEntries = [...educationalList];
     const { name, value } = event.target;
@@ -58,7 +65,8 @@ function Education() {
     setLoading(true);
     const data = {
       data: {
-        education: educationalList,
+        education: educationalList.map(({id, ...rest})=>rest)
+   
       },
     };
 
@@ -97,6 +105,7 @@ function Education() {
                 <Input
                   className="border-2 border-gray-400"
                   name="universityName"
+                  defaultValue={item?.universityName}
                   onChange={(e) => handleChange(e, index)}
                 />
               </div>
@@ -106,6 +115,7 @@ function Education() {
                 <Input
                   className="border-2 border-gray-400"
                   name="degree"
+                  defaultValue={item?.degree}
                   onChange={(e) => handleChange(e, index)}
                 />
               </div>
@@ -115,6 +125,7 @@ function Education() {
                 <Input
                   className="border-2 border-gray-400"
                   name="major"
+                  defaultValue={item?.major}
                   onChange={(e) => handleChange(e, index)}
                 />
               </div>
@@ -125,6 +136,7 @@ function Education() {
                   type="date"
                   className="border-2 border-gray-400"
                   name="startDate"
+                  defaultValue={item?.startDate}
                   onChange={(e) => handleChange(e, index)}
                 />
               </div>
@@ -135,6 +147,7 @@ function Education() {
                   type="date"
                   className="border-2 border-gray-400"
                   name="endDate"
+                  defaultValue={item?.endDate}
                   onChange={(e) => handleChange(e, index)}
                 />
               </div>
@@ -144,6 +157,7 @@ function Education() {
                 <Textarea
                   className="border-2 border-gray-400"
                   name="description"
+                  defaultValue={item?.description}
                   onChange={(e) => handleChange(e, index)}
                 />
               </div>
