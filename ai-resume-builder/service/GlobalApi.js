@@ -20,9 +20,13 @@ const UpdateResumeDetail=(id,data)=>axiosClient.put('/user-resume-profiles/'+id,
 
 
 const GetResumeById=(id)=>axiosClient.get('/user-resume-profiles/'+id+"?populate=*")
+
+const DeleteResumeById=(id)=>axiosClient.delete('/user-resume-profiles/'+id)
+
 export default {
   CreateNewResume,
   GetUserResumes,
   UpdateResumeDetail,
-  GetResumeById
+  GetResumeById,
+  DeleteResumeById
 };

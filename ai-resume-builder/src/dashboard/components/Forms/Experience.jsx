@@ -221,12 +221,25 @@ function Experience() {
     }
   }, []); // Only run once
 
+  // const handleChange = (index, event) => {
+  //   const newEntries = [...experienceList];
+  //   const { name, value } = event.target;
+  //   newEntries[index][name] = value;
+  //   setExperienceList(newEntries);
+  // };
+
   const handleChange = (index, event) => {
-    const newEntries = [...experienceList];
-    const { name, value } = event.target;
-    newEntries[index][name] = value;
-    setExperienceList(newEntries);
-  };
+  const newEntries = [...experienceList];
+  const { name, value } = event.target;
+  newEntries[index][name] = value;
+  setExperienceList(newEntries);
+
+  // 🔑 Immediately sync with context
+  setResumeInfo((prev) => ({
+    ...prev,
+    experience: newEntries,
+  }));
+};
 
   const AddNewExperience = () => {
     setExperienceList([...experienceList, { ...formField }]);

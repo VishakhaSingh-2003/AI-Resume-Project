@@ -30,7 +30,7 @@ useEffect(()=>{
       <div className='mt-10 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-30 place-items-center'>
         <AddResume />
         {resumeList.length>0&&resumeList.map((resume,index)=>{
-         return <ResumeCardItem resume={resume} key={index}/>
+         return <ResumeCardItem resume={resume} key={index } refreshData={GetResumesList}/>
         })}
       </div>
     </div>

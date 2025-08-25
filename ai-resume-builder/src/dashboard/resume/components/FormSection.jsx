@@ -9,6 +9,7 @@ import Skills from "@/dashboard/components/Forms/Skills";
 import { Home } from "lucide-react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import ViewResume from "@/my-resume/view";
+import ThemeColor from "@/dashboard/components/ThemeColor";
 
 function FormSection() {
   const [activeFormIndex, setActiveFormindex] = useState(2);
@@ -24,13 +25,7 @@ function FormSection() {
           <Button className='bg-[#9f5bff] hover:bg-[#9f5bff] text-white
               hover:scale-105 transition-transform'><Home/></Button>
           </Link>
-          <Button
-            variant="outline"
-            size="sm"
-            className=" hover:scale-105 transition-transform bg-white hover:bg-white text-black flex gap-2">
-            <LayoutGrid />
-            Theme
-          </Button>
+          <ThemeColor/>
           
         </div>
 
