@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext,useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { LayoutGrid } from 'lucide-react'
 import {
@@ -6,6 +6,10 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { ResumeInfoContext } from '@/context/ResumeInfoContext'
+import GlobalApi from '../../../service/GlobalApi'
+import { useParams } from 'react-router-dom'
+import { toast } from 'sonner'
 
 function ThemeColor() {
     const colors=[
@@ -14,9 +18,32 @@ function ThemeColor() {
         "#33FF71", "#3371FF", "#A1FF33", "#33A1FF", "#FF5733",
         "#5733FF", "#33FF5A", "#5A33FF", "#FF335A", "#335AFF"
     ]
+
+    const {resumeInfo, setResumeInfo}= useContext(ResumeInfoContext)
+    const [selectedColor, setSelectedColor] = useState();
+    const {resumeId} = useParams();
+    const onColorSelect=(color)=>{
+      setSelectedColor(color)
+      setResumeInfo({
+        ...resumeInfo,
+        themeColor:color
+      });
+      const data={
+        data:{
+          themeColor:color
+        }
+      }
+      GlobalApi.UpdateResumeDetail(resumeId, data)
+  .then(resp => {
+    console.log('API response:', resp);
+    toast('Theme Color Updated');
+  })
+
+    }
     return(
       <Popover>
-  <PopoverTrigger asChild><Button
+  <PopoverTrigger asChild>
+    <Button
             variant="outline"
             size="sm"
             className=" hover:scale-105 transition-transform bg-white hover:bg-white text-black flex gap-2">
@@ -24,17 +51,34 @@ function ThemeColor() {
             Theme
           </Button></PopoverTrigger>
   <PopoverContent>
+    <h2 className='mb-2 text-sm font-bold'>Select Theme Color</h2>
+    <div className='grid grid-cols-5 gap-3'>
     {colors.map((item,index)=>(
         <div
-        className='h-5, w-5'
+        onClick={()=>onColorSelect(item)}
+        className={`h-5 w-5 rounded-full 
+        cursor-pointer hover:border-black border
+        ${selectedColor==item&&'border border-black'}
+        `}
+        
         style={{
              background:item
         }}>
          
         </div>
     ))}
+    </div>
   </PopoverContent>
 </Popover>
     )
 }
 export default ThemeColor
+
+
+
+
+
+
+
+
+

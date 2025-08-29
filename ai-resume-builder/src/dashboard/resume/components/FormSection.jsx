@@ -12,7 +12,7 @@ import ViewResume from "@/my-resume/view";
 import ThemeColor from "@/dashboard/components/ThemeColor";
 
 function FormSection() {
-  const [activeFormIndex, setActiveFormindex] = useState(2);
+  const [activeFormIndex, setActiveFormindex] = useState(1);
 
   const [enableNext, setEnableNext] = useState(true);
   const {resumeId} = useParams();
@@ -45,7 +45,7 @@ function FormSection() {
             className="bg-[#9f5bff] hover:bg-[#9f5bff]
             hover:scale-105 transition-transform text-white flex gap-2"
             size="sm"
-            onClick={() => setActiveFormindex(activeFormIndex + 1)}>
+            onClick={() => setActiveFormindex(activeFormIndex + 1 )}>
             Next <ArrowRight />
           </Button>
         </div>

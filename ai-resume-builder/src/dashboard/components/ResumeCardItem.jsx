@@ -148,7 +148,7 @@ function ResumeCardItem({ resume, refreshData }) {
 
   return (
     <div
-      className="relative w-56 rounded-lg shadow-md overflow-hidden bg-gradient-to-b from-pink-100 via-purple-200 to-blue-200 mr-4 mb-4"
+      className="relative w-56 rounded-lg shadow-md overflow-hidden bg-gradient-to-b from-pink-100 via-purple-200 to-blue-200 mr-4 mb-4 h-full"
       style={{ borderColor: resume?.themeColor }}>
       {/* Dropdown Trigger at top-right */}
       <div className="absolute top-3 right-3 z-10">
@@ -158,7 +158,7 @@ function ResumeCardItem({ resume, refreshData }) {
               <MoreVertical size={20} />
             </button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="bg-white rounded shadow-lg py-1">
+          <DropdownMenuContent className="bg-white rounded shadow-lg py-1 drop_item">
             <DropdownMenuItem
               onClick={() =>
                 navigation(
